@@ -204,7 +204,10 @@ if __name__ == '__main__':
         tokens = []
         embed_ids = []
         for word in punctuation.sub(' ', text).split():
-            word = russian.correction(word.strip().lower())
+            word = word.strip().lower()
+            correct_word = russian.correction(word)
+            if correct_word is not None:
+                word = correct_word
             p = morph.parse(word)[0]
             embed_id = token_to_embed_id(p.normal_form)
             if embed_id is not None:
